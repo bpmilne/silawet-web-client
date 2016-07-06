@@ -2,7 +2,7 @@
 # --- !Ups
 
 create table silawet_message (
-  id                        bigint not null,
+  id                        BIGSERIAL not null,
   silawet_id                varchar(999),
   message                   varchar(999),
   signature                 varchar(999),
@@ -17,7 +17,7 @@ create table silawet_message (
 ;
 
 create table silawet_user (
-  id                        bigint not null,
+  id                        BIGSERIAL not null,
   username                  varchar(255),
   password                  varchar(512),
   private_key               varchar(2000),
