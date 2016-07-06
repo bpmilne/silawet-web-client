@@ -79,7 +79,6 @@ public class HomeController extends Controller {
         return ok(views.html.index.render(user, "", messages, page+1, page-1));
     }
 
-
     public Result dashboard()
     {
         List<SilawetUser> rssList = SilawetUser.findAll();
@@ -99,6 +98,15 @@ public class HomeController extends Controller {
         }
         return redirect("/dashboard");
     }
+
+    public Result message(String messageId) {
+
+        SilawetMessage silawetMessage = SilawetMessage.findBySilawetId(messageId);
+        String username = session("connected");
+
+        return ok(views.html.message.render(silawetMessage));
+    }
+
 
     public Result delete(Long id)
     {
