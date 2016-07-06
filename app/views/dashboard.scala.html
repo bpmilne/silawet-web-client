@@ -1,0 +1,38 @@
+@(users: List[SilawetUser], showIds: Boolean)
+
+
+@main("Silawet Dashboard") {
+
+<div class="Right" id="mainElement">
+    <h1><a href="/">Dashboard</a></h1>
+    <p class="breadcrumbs"> <a href="/">Home</a> </p>
+
+    <br><br>
+    <span style="margin:0px; padding-left:10px; font-size:18px;">Login</span>
+    <br><br>
+    @helper.form(action = routes.HomeController.login) {
+        <span style="margin:0px; padding-left:10px; font-size:18px;">username:</span>
+        <input style="margin-left:24px;" type="text" name="username"><br><br>
+        <span style="margin:0px; padding-left:10px; font-size:18px;">password:</span>
+        <input style="margin-left:9px;" type="text" name="password"><br><br>
+        <input style="margin-left:10px;" type="submit" value="login">
+        }
+
+    <br><br>
+    <span style="margin:0px; padding-left:10px; font-size:18px;">Register</span>
+    <br><br>
+    @helper.form(action = routes.HomeController.register) {
+        <span style="margin:0px; padding-left:10px; font-size:18px;">username:</span>
+        <input style="margin-left:24px;" type="text" name="registerUsername"><br><br>
+        <span style="margin:0px; padding-left:10px; font-size:18px;">password:</span>
+        <input style="margin-left:9px;" type="text" name="registerPassword"><br><br>
+        <input style="margin-left:10px;" type="submit" value="register">
+        }
+
+        @for(user <- users) {
+         <p>@if(showIds){ @user.id } @user.username</p>
+    }
+
+</div>
+
+}

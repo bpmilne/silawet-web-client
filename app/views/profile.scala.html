@@ -1,0 +1,40 @@
+@(user: SilawetUser)
+
+
+@main("Silawet Profile") {
+
+<div class="Right" id="mainElement">
+    <h1><a href="/">@user.username</a></h1>
+    <p class="breadcrumbs"> <a href="/">Home</a> </p>
+
+
+    <p>public key: @user.public_key</p>
+    <p>private key: @user.private_key</p>
+
+    <p>The content on this website is created by individuals who write messages to the Silawet ledger. It is not owned or controlled by any party. </p>
+
+
+    <br><br>
+    <span style="margin:0px; padding-left:10px; font-size:18px;">Regenerate Key</span>
+    <br><br>
+    @helper.form(action = routes.HomeController.regenerateKey) {
+    <input style="margin-left:10px;" type="submit" value="regenerate">
+    }
+
+    <br><br>
+    <span style="margin:0px; padding-left:10px; font-size:18px;">Logout</span>
+    <br><br>
+    @helper.form(action = routes.HomeController.logout) {
+    <input style="margin-left:10px;" type="submit" value="logout">
+    }
+
+    <br><br>
+    <span style="margin:0px; padding-left:10px; font-size:18px;">Delete</span>
+    <br><br>
+    @helper.form(action = routes.HomeController.delete) {
+    <input style="margin-left:10px;" type="submit" value="delete">
+    }
+
+</div>
+
+}

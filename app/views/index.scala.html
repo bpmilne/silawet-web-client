@@ -1,0 +1,37 @@
+@(user: SilawetUser, message: String, messages: List[SilawetMessage], nextPage: Int, prevPage: Int)
+
+@main("Silawet Web") {
+
+<div class="Right" id="mainElement">
+ <h1><a href="/">Web</a></h1>
+ <p class="breadcrumbs"> <a href="/">Home</a> |  @if(user != null) {
+  <a href="/profile">@user.username</a>
+  } else {
+  <a href="/dashboard">Register/Login</a>
+  }
+
+ <h3>About Web</h3>
+ <p>The Silawet Web is a client that can be used to register an account and post messages to the Silawewt ledger at <a href="http://silawet.com">silawet.com</a>. </p>
+ <p>The content on this website is created by individuals who write messages to the Silawet ledger. It is not owned or controlled by any party. </p>
+
+ @if(user != null) {
+   @helper.form(action = routes.HomeController.sendMessage) {
+   <span style="margin:0px; padding-left:10px; font-size:18px;">message:</span>
+   <input style="margin-left:24px;" type="text" name="message"><br><br>
+   <input style="margin-left:10px;" type="submit" value="send">
+   }
+ }
+
+    @for(m <- messages) {
+    <p><a href="http://explorer.silawet.com/message/@m.silawet_id">@m.authored_at</a><span>@m.message</span></p>
+    }
+
+    @if(prevPage == -1) {
+    <p><a href="/@nextPage">Next</a></p>
+    } else {
+    <p><a href="/@prevPage">Prev</a><a href="/@nextPage">Next</a></p>
+    }
+
+</div>
+
+}
