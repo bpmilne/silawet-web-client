@@ -107,6 +107,12 @@ public class HomeController extends Controller {
         return ok(views.html.message.render(silawetMessage));
     }
 
+    public Result author(String authorId)
+    {
+        List<SilawetMessage> silawetMessages = SilawetMessage.findByAuthorId(authorId);
+
+        return ok(views.html.author.render(silawetMessages.get(0).authored_by, silawetMessages));
+    }
 
     public Result delete(Long id)
     {
@@ -198,6 +204,7 @@ public class HomeController extends Controller {
                 try {
                     postToSilawet(silawetMessage);
                 } catch (Exception e) {
+                    System.out.println("exception " + e.getMessage());
 
                 }
             }

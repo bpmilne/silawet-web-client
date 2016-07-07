@@ -1,0 +1,20 @@
+@(authoredBy: String, messages: List[SilawetMessage])
+
+
+@main("Silawet Web") {
+<div class="Right" id="mainElement">
+    <h1><a href="/">Explorer</a></h1>
+    <p class="breadcrumbs"> <a href="/">Home</a>
+
+    <h3>Authored By</h3>
+    <p>@authoredBy</a></p>
+
+    <h3>Messages:</h3>
+    @for(m <- messages) {
+    <p>ID:<a href="/message/@m.silawet_id">@m.silawet_id</a> </p>
+    <p>Authored At:@m.authored_at</p>
+    <p><span>@m.message</span></p>
+    }
+
+</div>
+}

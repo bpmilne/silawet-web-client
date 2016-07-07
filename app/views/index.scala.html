@@ -23,7 +23,7 @@
  }
 
     @for(m <- messages) {
-    <p><a href="https://stormy-journey-84212.herokuapp.com/message/@m.silawet_id">@m.authored_at</a><span>@m.message</span></p>
+    <p><a href="/message/@m.silawet_id">@m.authored_at</a><span>@m.message</span></p>
     }
 
     @if(prevPage == -1) {

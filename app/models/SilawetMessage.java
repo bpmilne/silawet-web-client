@@ -1,7 +1,9 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -72,19 +74,20 @@ public class SilawetMessage extends Model{
             ObjectNode messageJson = Json.newObject();
             messageJson.put("message", message);
 
+
             try {
 
                 String signature = rsaSign(silawet_id, messageJson, epoch, user.private_key);
 
                 String authored_by = authoredBy(user.public_key);
 
-                SilawetMessage silawetMessage = new SilawetMessage(silawet_id, message, signature, authored_by, authored_at, new Date());
+                SilawetMessage silawetMessage = new SilawetMessage(silawet_id, messageJson.get("message").textValue(), signature, authored_by, authored_at, new Date());
                 silawetMessage.save();
 
                 return silawetMessage;
 
             } catch (Exception e) {
-
+                System.out.println("exception " + e.getMessage());
                 return null;
             }
     }
@@ -109,6 +112,10 @@ public class SilawetMessage extends Model{
         {
             return null;
         }
+    }
+
+    public static List<SilawetMessage> findByAuthorId(String authorId) {
+        return find.where().eq("authored_by", authorId).findList();
     }
 
     public static SilawetMessage findById(Long id)
