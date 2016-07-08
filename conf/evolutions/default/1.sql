@@ -4,7 +4,7 @@
 create table silawet_message (
   id                        BIGSERIAL not null,
   silawet_id                varchar(999),
-  message                   varchar(999),
+  message                   varchar(2000),
   signature                 varchar(999),
   authored_by               varchar(999),
   authored_at               varchar(255),
