@@ -192,6 +192,13 @@ public class HomeController extends Controller {
     {
         DynamicForm requestData = Form.form().bindFromRequest();
         String message = requestData.get("message");
+        message = message.replace("—","-");
+        message = message.replace("’","'");
+        message = message.replace("“","'");
+        message = message.replace("”","'");
+        message = message.replaceAll("[^a-zA-Z0-9&,\":'\\-\\}\\{ _]|^\\s+","");
+
+        System.out.println(message);
 
         String username = session("connected");
 
@@ -222,7 +229,6 @@ public class HomeController extends Controller {
         long epoch = Long.parseLong(message.authored_at);
 
         String json = "{\"id\":\""+message.silawet_id+"\","+escapedMessage.substring(1, escapedMessage.length()-1)+",\"signature\":\""+message.signature+"\",\"authored_by\":\""+message.authored_by+"\",\"authored_at\":"+epoch+".3372}";
-//        Logger.debug(json);
         StringEntity jsonBody = new StringEntity(json);
 
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -241,7 +247,8 @@ public class HomeController extends Controller {
         }
         else if (code == 400)
         {
-//            System.out.print("didn't work");
+            System.out.println("didn't work ");
+            System.out.println("json " + json);
             message.delete();
         }
     }
