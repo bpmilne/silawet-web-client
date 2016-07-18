@@ -196,9 +196,7 @@ public class HomeController extends Controller {
         message = message.replace("’","'");
         message = message.replace("“","'");
         message = message.replace("”","'");
-        message = message.replaceAll("[^a-zA-Z0-9&,\":'\\-\\}\\{ _]|^\\s+","");
-
-        System.out.println(message);
+        message = message.replaceAll("[^a-zA-Z0-9&,/\":'\\-\\}\\{ _]|^\\s+","");
 
         String username = session("connected");
 
